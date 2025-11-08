@@ -1,5 +1,6 @@
+require('dotenv').config();
 const Discord = require('discord.js');
-const fs = require('fs');
+
 const client = new Discord.Client({
   intents: [
     Discord.GatewayIntentBits.Guilds,
@@ -14,39 +15,6 @@ const userPoints = new Map();
 const userInvites = new Map();
 const inviteCounts = new Map();
 const joinedMembers = new Set();
-
-// تحميل البيانات من الملف
-function loadData() {
-  try {
-    if (fs.existsSync('hi.json')) {
-      const data = JSON.parse(fs.readFileSync('hi.json', 'utf8'));
-      if (data.userPoints) {
-        Object.entries(data.userPoints).forEach(([key, value]) => {
-          userPoints.set(key, value);
-        });
-      }
-      if (data.joinedMembers) {
-        data.joinedMembers.forEach(id => joinedMembers.add(id));
-      }
-      console.log('تم تحميل البيانات من hi.json');
-    }
-  } catch (error) {
-    console.error('خطأ في تحميل البيانات:', error);
-  }
-}
-
-// حفظ البيانات في الملف
-function saveData() {
-  try {
-    const data = {
-      userPoints: Object.fromEntries(userPoints),
-      joinedMembers: Array.from(joinedMembers)
-    };
-    fs.writeFileSync('hi.json', JSON.stringify(data, null, 2));
-  } catch (error) {
-    console.error('خطأ في حفظ البيانات:', error);
-  }
-}
 
 client.on('ready', async () => {
   console.log(`البوت شغال: ${client.user.tag}`);
@@ -124,7 +92,6 @@ client.on('guildMemberAdd', async (member) => {
 
 // تتبع الاعضاء اللي يطلعون
 client.on('guildMemberRemove', (member) => {
-  // ما نشيل من القائمة عشان لو رجع ما ياخذ نقطة
   console.log(`عضو طلع: ${member.user.tag}`);
 });
 
@@ -203,7 +170,7 @@ client.on('interactionCreate', async (interaction) => {
       { name: '100 الف كريديت', weight: 20 },
       { name: '400 روب', weight: 10 },
       { name: '5 دولار', weight: 7 },
-      { name: 'ايفكت 5$', weight: 2 },
+      { name: 'ايفكت 5 دولار', weight: 2 },
       { name: 'نيترو بيسك', weight: 1 }
     ];
     
@@ -229,7 +196,7 @@ client.on('interactionCreate', async (interaction) => {
       { name: '250 الف كريديت', weight: 20 },
       { name: '1000 روب', weight: 10 },
       { name: '12 دولار', weight: 7 },
-      { name: '10$ ايفكتات', weight: 2 },
+      { name: '10 دولار ايفكتات', weight: 2 },
       { name: 'نيترو قيمنق', weight: 1 }
     ];
     
@@ -256,6 +223,6 @@ function getRandomPrize(prizes) {
   return prizes[0].name;
 }
 
-client.login(process.env.TOKEN).catch(err => {
+client.login(process.env.DISCORD_TOKEN).catch(err => {
   console.error('خطأ في الدخول:', err);
 });
