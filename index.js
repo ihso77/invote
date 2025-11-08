@@ -146,6 +146,21 @@ client.on('messageCreate', async (message) => {
       components: [row]
     });
   }
+  
+  // أمر تصفير النقاط (للأدمن فقط)
+  if (message.content === '*rest') {
+    // التحقق من صلاحية الأدمن
+    if (!message.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
+      await message.reply('⛔ هذا الأمر متاح فقط للأدمنستريتر!');
+      return;
+    }
+    
+    // تصفير جميع النقاط
+    const totalUsers = userPoints.size;
+    userPoints.clear();
+    
+    await message.reply(`✅ **تم تصفير نقاط جميع الأعضاء!**\n\nعدد الأعضاء: ${totalUsers}`);
+  }
 });
 
 // نظام العجلة
