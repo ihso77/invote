@@ -180,14 +180,10 @@ client.on('interactionCreate', async (interaction) => {
     userPoints.set(userId, points - 1);
     
     const prizes = [
-      { name: '30 الف كريديت', weight: 35 },
-      { name: '50 الف كريديت', weight: 25 },
-      { name: '100 الف كريديت', weight: 20 },
-      { name: '400 روب', weight: 10 },
-      { name: '5 دولار', weight: 7 },
-      { name: 'ايفكت 5 دولار', weight: 2 },
-      { name: 'نيترو بيسك', weight: 1 }
-    ];
+  { name: '30 الف كريديت', weight: 35 },
+  { name: '50 الف كريديت', weight: 25 },
+  { name: '100 الف كريديت', weight: 20 }
+];
     
     const prize = getRandomPrize(prizes);
     
@@ -206,14 +202,10 @@ client.on('interactionCreate', async (interaction) => {
     userPoints.set(userId, points - 2);
     
     const prizes = [
-      { name: '60 الف كريديت', weight: 35 },
-      { name: '150 الف كريديت', weight: 25 },
-      { name: '250 الف كريديت', weight: 20 },
-      { name: '1000 روب', weight: 10 },
-      { name: '12 دولار', weight: 7 },
-      { name: '10 دولار ايفكتات', weight: 2 },
-      { name: 'نيترو قيمنق', weight: 1 }
-    ];
+  { name: '60 الف كريديت', weight: 35 },
+  { name: '150 الف كريديت', weight: 25 },
+  { name: '250 الف كريديت', weight: 20 }
+];
     
     const prize = getRandomPrize(prizes);
     
