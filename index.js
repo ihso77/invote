@@ -201,10 +201,10 @@ client.on('interactionCreate', async (interaction) => {
     
     userPoints.set(userId, points - 2);
     
-    const prizes = [
+ const prizes = [
   { name: '60 الف كريديت', weight: 35 },
-  { name: '150 الف كريديت', weight: 25 },
-  { name: '250 الف كريديت', weight: 20 }
+  { name: '100 الف كريديت', weight: 25 },
+  { name: '170 الف كريديت', weight: 20 }
 ];
     
     const prize = getRandomPrize(prizes);
